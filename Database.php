@@ -7,16 +7,25 @@ function ConnectToDB(){
 
 function UserInDB($name,$password){
   $pdo=ConnectToDB();
-  $stmt = $pdo->prepare('SELECT * FROM User WHERE Name = :name AND Password = :password');
+  $stmt = $pdo->prepare('SELECT * FROM User WHERE Name = :name');
   #filter_input
   $stmt->bindParam(':name', $name,PDO::PARAM_STR);
-  $stmt->bindParam(':password',$password,PDO::PARAM_STR);
-
+ 
   $stmt->execute();
   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  #var_dump($results);
   if (count($results)>0) return true;
   else return false;
+}
+
+function PasswordOfAUser($name){
+  $pdo=ConnectToDB();
+  $stmt = $pdo->prepare('SELECT Password FROM User WHERE Name = :name');
+  #filter_input
+  $stmt->bindParam(':name', $name,PDO::PARAM_STR);
+
+  $stmt->execute();
+  $results = $stmt->fetch(PDO::FETCH_ASSOC);
+  return $results['Password'];
 }
 
 function InsertToDB($name,$password){
