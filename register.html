@@ -1,17 +1,45 @@
 <html>
 <body>
+   <script text="type/javascript">
+     function CheckUserName(id)
+     {
+        var x=document.getElementById(id).value; 
+        if (x>10) document.getElementById("name").innerHTML="wrong";
+        else document.getElementById("name").innerHTML="";
+     }
+     
+     function CheckPassword1(id)
+     {
+        var x=document.getElementById(id).value; 
+        if (x.length<6) document.getElementById("psw1").innerHTML="password too short";
+        else document.getElementById("psw1").innerHTML="";
+     }
+     
+     function CheckPassword2(id1,id2)
+     {
+        var x=document.getElementById(id1).value; 
+        var y=document.getElementById(id2).value;
+        if (x!=y) document.getElementById("psw2").innerHTML="the two passwords are different";
+        else document.getElementById("psw2").innerHTML="";
+     }
+  </script>
 
   <form method="post" action="register.php">
-  UserName: <input type="text" name="username">
+  UserName: <input type="text" name="username" id="username" onchange="CheckUserName(this.id)">
+  <p id="name">  </p>
   </br>
-  Password: <input type="text" name="password1">
+
+  Password: <input type="text" name="password1" id="password1" onchange="CheckPassword1(this.id)">
+  <p id="psw1">  </p>
   </br>
-  Password Again: <input type="text" name="password2">
+
+  Password Again: <input type="text" name="password2" id="password2" onchange="CheckPassword2(this.id,'password1')">
+  <p id="psw2">  </p>
   </br>
+
   <input type="submit",name="register",value="register">
   </form>
-
+ 
+ 
 </body>
 </html>
-
-
