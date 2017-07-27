@@ -16,8 +16,8 @@
       
         <style type="text/css"> 
 
-             body{background: url() no-repeat;background-size:cover;font-size: 16px;}
-             .form{background: rgba(255,255,255,0.3);width:500px;margin:100px auto;white-space:nowrap;}
+             body{background: url(4.jpg) no-repeat;background-size:cover;font-size: 16px;}
+             .form{background: rgba(255,255,255,0.3);width:700px;margin:100px auto;white-space:nowrap;}
 
              
 .fa{display: inline-block;top: 27px;left: 6px;position: relative;color:#ccc;}
@@ -31,34 +31,62 @@
         </style>
     </head>
     <body>
+<script text="type/javascript">
+     function CheckUserName(id)
+     {
+        var x=document.getElementById(id).value; 
+        if (x>10) document.getElementById("name").innerHTML="wrong";
+        else document.getElementById("name").innerHTML="";
+     }
+     
+     function CheckPassword1(id)
+     {
+        var x=document.getElementById(id).value; 
+        if (x.length<6) document.getElementById("psw1").innerHTML="password too short";
+        else document.getElementById("psw1").innerHTML="";
+     }
+     
+     function CheckPassword2(id1,id2)
+     {
+        var x=document.getElementById(id1).value; 
+        var y=document.getElementById(id2).value;
+        if (x!=y) document.getElementById("psw2").innerHTML="the two passwords are different";
+        else document.getElementById("psw2").innerHTML="";
+     }
+  </script>
     <div class="container">
-<div class="form row">
-            <form class="form-horizontal col-sm-offset-3 col-md-offset-3"
+       <div class="form row">
+          <form class="form-horizontal col-sm-offset-3 col-md-offset-3"
  id="login_form" method="post" action="register.php" >
                 
-        
-                <div class="col-sm-9 col-md-9">
+              <div class="col-sm-9 col-md-9">
                     <div class="form-group">
                       
-                    <i class="fa fa-user fa-lg"></i>   
+                <i class="fa fa-user fa-lg"></i>   
 
-                <input class="form-control required" type="text" name="username"  placeholder="请输入用户名" autofocus="autofocus" maxlength="8"/>
-
-                    </div>
-                    <div class="form-group">
-                            <i class="fa fa-lock fa-lg"></i>
-                           <input class="form-control required" type="text"  name="password"  placeholder="请输入密码" autofocus="autofocus" maxlength="8"/>
-                   </div>
+                <input class="form-control required" type="text" name="username"    id="username" onchange="CheckUserName(this.id)"  placeholder="请输入用户名" autofocus="autofocus" maxlength="36"/>
+          <p id="name">  </p>
+           </br>
+            </div>
+                    
+            <div class="form-group">
+               <i class="fa fa-lock fa-lg"></i>
+                 <input class="form-control required" type="text"  name="password1" id="password1" onchange="CheckPassword1(this.id)"  placeholder="请输入密码" autofocus="autofocus" maxlength="36"/>
+         <p id="psw1">  </p>
+          </br>
+           </div>
 
                    <div class="form-group">
-                            <i class="fa fa-lock fa-lg"></i>
-                           <input class="form-control required" type="text"  name="password"  placeholder="请再一次输入密码" autofocus="autofocus" maxlength="8"/>
-                   </div>
+                      <i class="fa fa-lock fa-lg"></i>
+                        <input class="form-control required" type="text"  name="password2"  placeholder="请再一次输入密码" id="password2" onchange="CheckPassword2(this.id,'password1')" autofocus="autofocus" maxlength="36"/>
+            <p id="psw2">  </p>
+             </br>
+               </div>
                    
                     
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-success pull-right " value="注册"/>
-                    </div>
+            <div class="form-group">
+             <input type="submit", class="btn btn-success pull-right " value="注册"/>
+                </div>
                 
             </form>
         </div>
