@@ -24,25 +24,30 @@ define('ROOT',dirname(__FILE__).'/');
       $_FILES['file']['type']=='application/vnd.oasis.opendocument.text'||
       $_FILES['file']['type']=='application/vnd.oasis.opendocument.spreadsheet')
       {
-        //检查是否存在重名文件
-        if (file_exists("upload/" . $_FILES["file"]["name"]))
-        {
-          echo $_FILES["file"]["name"] . " 文件已存在";
+        if($_FILES['file']['size']>10){
+          echo "只能上传小于10MB的文件";
         }
-        else
-        {
-          //将文件上传到服务器文件夹内并检测是否上传成功
-          if(is_uploaded_file($_FILES['file']['tmp_name'])){
-            $stored_path = ROOT.'upload/'.basename($_FILES['file']['name']);
-            if(move_uploaded_file($_FILES['file']['tmp_name'],$stored_path)){
-              echo "上传成功<br>";
+        else {
+          //检查是否存在重名文件
+          if (file_exists("upload/" . $_FILES["file"]["name"]))
+          {
+            echo $_FILES["file"]["name"] . " 文件已存在";
+          }
+          else
+          {
+            //将文件上传到服务器文件夹内并检测是否上传成功
+            if(is_uploaded_file($_FILES['file']['tmp_name'])){
+              $stored_path = ROOT.'upload/'.basename($_FILES['file']['name']);
+              if(move_uploaded_file($_FILES['file']['tmp_name'],$stored_path)){
+                echo "上传成功<br>";
+              }else{
+                echo '上传失败<br>';
+              }
             }else{
               echo '上传失败<br>';
             }
-          }else{
-            echo '上传失败<br>';
+           }
           }
-         }
         }
         else echo "只能上传jpg/png/git/ods/odt格式的文件";
       }
