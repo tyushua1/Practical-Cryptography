@@ -25,14 +25,14 @@ function PasswordOfAUser($name){
   return $results['Password'];
 }
 
-function InsertToDB($name,$password,$privateKey,$publicKey){
+function InsertToDB($name,$password,$privateKey,$publicKey,$iv){
   $pdo=ConnectToDB();
-  $stmt = $pdo->prepare('INSERT INTO User(Name,Password,PrivateKey,PublicKey) VALUES (:name,:password,:PrivateKey,:PublicKey)');
+  $stmt = $pdo->prepare('INSERT INTO User(Name,Password,PrivateKey,PublicKey,iv) VALUES (:name,:password,:PrivateKey,:PublicKey,:iv)');
   $stmt->bindParam(':name', $name);
-  $stmt->bindParam(':password',$password);
+  $stmt->bindParam(':password',$password,PDO::PARAM_STR);
   $stmt->bindParam(':PrivateKey',$privateKey);
   $stmt->bindParam(':PublicKey',$publicKey);
+  $stmt->bindParam(':iv',$iv);
   $i=$stmt->execute();
   var_dump($i);
 }
-
