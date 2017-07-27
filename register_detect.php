@@ -6,7 +6,7 @@ function username_detect($username){
   //对用户名使用字符和长度进行验证，用户名必须由字母/数字/汉字组成，长度为6-36位
   //返回值为字符串
   if(!preg_match('/^[\x{4e00}-\x{9fa5}a-zA-Z0-9]{3,36}+$/u',$username)){
-    return "用户名只能包括数字/字母/中文";
+    echo"<script>alert('用户名只能包含字母/数字/汉字，长度为6-36位！');self.location='register_detect.html';</script>";
   }
 }
 
