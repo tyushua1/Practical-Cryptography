@@ -20,7 +20,10 @@ function display(){
           echo $filename;
           echo "'>";
           echo $filename;
-          echo "</a>";
+          echo "</a>                                                            " ;
+          echo '<form method="post" action="register.php">';
+          echo '<input type="submit" name="filename" value="分享">';
+          //echo '<button type="submit" formaction="register.html">分享</button>';
           echo "</br>";
 
         }
@@ -71,7 +74,7 @@ function display(){
     <div class="container">
 <div class="form row">
             <form class="form-horizontal col-sm-offset-3 col-md-offset-3"
- id="login_form" method="post" action="sharelink.php" >
+ id="login_form" method="post" action="Sharelink.php" top:27px >
             <?php  display();  ?>
 
             </form>
