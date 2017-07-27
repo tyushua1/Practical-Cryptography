@@ -30,7 +30,7 @@ function Generat($name,&$pkeyout,&$certout)
    openssl_x509_export($sscert, $certout);  //$certout:公钥证书
 }
 
-function Encrypt(&$plaintext,$psw,&$iv)
+function Encrypt(&$plaintext,$psw)
 {
    $method="aes-256-cbc";
    $enc_key=bin2hex($psw);
@@ -46,7 +46,7 @@ function Encrypt(&$plaintext,$psw,&$iv)
 }
 
 
-function Decrypt(&$saved_ciphertext,$psw,$iv)
+function Decrypt(&$saved_ciphertext,$psw)
 {
    $method="aes-256-cbc";
    $enc_key=bin2hex($psw);
@@ -59,10 +59,9 @@ function Decrypt(&$saved_ciphertext,$psw,$iv)
 }
    // 解析密文结构，提取解密所需各个字段
    list($extracted_method, $extracted_enc_options, $extracted_iv, $extracted_ciphertext) = explode('$', $saved_ciphertext); 
-
+    
    $decryptedtext = openssl_decrypt($extracted_ciphertext, $extracted_method, $enc_key, 
 $enc_options, hex2bin($extracted_iv));
-
    $saved_ciphertext=$decryptedtext;
 }
 

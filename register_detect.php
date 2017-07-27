@@ -26,7 +26,7 @@ function password_strength($password){
   $password_len=strlen($password);
   $error_record=array();
   $count=0;
-  if($password_len<6){
+  if($password_len<8){
     $error_record[$count]=$error[0];
     $count++;
   }
